@@ -11,7 +11,8 @@ defmodule KileedClient.MixProject do
       source_url: "https://github.com/alisinabh/kileed_client_elixir",
       name: "Kileed Client",
       description: description(),
-      build_embedded: Mix.env() == :prod
+      build_embedded: Mix.env() == :prod,
+      package: package()
     ]
   end
 
@@ -42,7 +43,8 @@ defmodule KileedClient.MixProject do
       # These are the default files included in the package
       files: ~w(lib mix.exs README* LICENSE),
       licenses: ["Apache 2.0"],
-      links: %{"GitHub" => "https://github.com/alisinabh/kileed_client_elixir"}
+      links: %{"GitHub" => "https://github.com/alisinabh/kileed_client_elixir"},
+      maintainers: ["Alisina Bahadori"]
     ]
   end
 end

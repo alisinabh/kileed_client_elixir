@@ -1,11 +1,12 @@
 # KileedClient
 
-**TODO: Add description**
+Kileed client for elixir.
+
+Kileed is an authentication service.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `kileed_client` to your list of dependencies in `mix.exs`:
+Add kileed_client to deps.
 
 ```elixir
 def deps do
@@ -15,7 +16,5 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/kileed_client](https://hexdocs.pm/kileed_client).
+Documentations available at [https://hexdocs.pm/kileed_client](https://hexdocs.pm/kileed_client).
 
