@@ -143,8 +143,8 @@ defmodule KileedClient do
     end
   end
 
-  defp get_config(),
-    do:
-      {:ok, Application.get_env(:kileed_client, :server_url),
-       Application.get_env(:kileed_client, :auth_token)}
+  defp get_config() do
+    {:ok, System.get_env("KILEED_SERVER_URL") || Application.get_env(:kileed_client, :server_url),
+     System.get_env("KILEED_AUTH_TOKEN") || Application.get_env(:kileed_client, :auth_token)}
+  end
 end

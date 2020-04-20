@@ -4,7 +4,7 @@ defmodule KileedClient.MixProject do
   def project do
     [
       app: :kileed_client,
-      version: "0.0.1",
+      version: "0.0.3",
       elixir: "~> 1.4",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -28,7 +28,7 @@ defmodule KileedClient.MixProject do
     [
       {:httpoison, "~> 1.2"},
       {:poison, "~> 4.0"},
-      {:ex_doc, "~> 0.18.0", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.21.3", only: :dev, runtime: false}
     ]
   end
 
