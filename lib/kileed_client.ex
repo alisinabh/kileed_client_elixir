@@ -7,8 +7,6 @@ defmodule KileedClient do
 
   require Logger
 
-  @kileed_server_url Application.get_env(:kileed_client, :server_url)
-  @auth_header Application.get_env(:kileed_client, :auth_token)
   @timeout Application.get_env(:kileed_client, :timeout, 20_000)
 
   @start_auth_addr "/start_auth"
@@ -41,14 +39,15 @@ defmodule KileedClient do
   """
   @spec start_challenge(String.t(), String.t()) :: :ok | {:error, errors()}
   def start_challenge(phone_number, client_uid) do
-    url = Path.join(@kileed_server_url, @start_auth_addr)
+    {:ok, server_url, auth_header} = get_config()
+    url = Path.join(server_url, @start_auth_addr)
     req = %{"type" => "phone", "property" => phone_number, "client_ip" => client_uid}
 
     {:ok, response} =
       HTTPoison.post(
         url,
         Poison.encode!(req),
-        [Authorization: @auth_header, "Content-Type": "application/json"],
+        [Authorization: auth_header, "Content-Type": "application/json"],
         timeout: @timeout
       )
 
@@ -89,7 +88,8 @@ defmodule KileedClient do
   @spec commit_challenge(String.t(), String.t(), String.t()) ::
           {:ok, %{user_id: integer, session: kileed_session}} | {:error, errors()}
   def commit_challenge(phone_number, challenge_answer, client_uid) do
-    url = Path.join(@kileed_server_url, @commit_auth_addr)
+    {:ok, server_url, auth_header} = get_config()
+    url = Path.join(server_url, @commit_auth_addr)
 
     req = %{
       type: "phone",
@@ -102,7 +102,7 @@ defmodule KileedClient do
       HTTPoison.post(
         url,
         Poison.encode!(req),
-        [Authorization: @auth_header, "Content-Type": "application/json"],
+        [Authorization: auth_header, "Content-Type": "application/json"],
         timeout: @timeout
       )
 
@@ -142,4 +142,9 @@ defmodule KileedClient do
         {:error, :unknown}
     end
   end
+
+  defp get_config(),
+    do:
+      {:ok, Application.get_env(:kileed_client, :server_url),
+       Application.get_env(:kileed_client, :auth_token)}
 end
